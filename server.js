@@ -84,7 +84,7 @@ app.get("/getaudio",async(req,res)=>{
         const audioUrl = await youtubedl(videoUrl, {
   getUrl: true,
   // Improved format selector (this fixes most "Requested format is not available" errors)
-  format: 'bestaudio[ext=m4a]/bestaudio[ext=webm]/bestaudio/best',
+  format: 'bestaudio',
 
   // Modern YouTube workarounds (very important right now)
   extractorArgs: 'youtube:player_client=android,web,ios',
