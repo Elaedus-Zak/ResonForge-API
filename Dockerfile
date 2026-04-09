@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:20
 
 # Install python3 and yt-dlp dependencies
 RUN apt-get update && apt-get install -y python3 python3-pip ffmpeg
