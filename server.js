@@ -83,12 +83,20 @@ app.get("/getaudio",async(req,res)=>{
     }else{
         const audioUrl = await youtubedl(videoUrl, {
   getUrl: true,
-  format: 'bestaudio',
+  // Improved format selector (this fixes most "Requested format is not available" errors)
+  format: 'bestaudio[ext=m4a]/bestaudio[ext=webm]/bestaudio/best',
+
+  // Modern YouTube workarounds (very important right now)
+  extractorArgs: 'youtube:player_client=android,web,ios',
+
   noWarnings: true,
   noCheckCertificates: true,
-  concurrentFragments: 5,
   ignoreConfig: true,
-  cookies: 'cookies.txt',
+  concurrentFragments: 8,        // slightly higher is usually fine on Railway
+  cookies: 'cookies.txt',        // keep if you're using login cookies
+
+  // Extra safety options
+  // ignoreErrors: true,         // uncomment only if you want to be very lenient
 });
     await redis.set(videoId,audioUrl,"EX",18000)
     res.redirect(audioUrl)
