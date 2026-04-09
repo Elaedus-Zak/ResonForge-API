@@ -83,7 +83,7 @@ app.get("/getaudio",async(req,res)=>{
     }else{
         const audioUrl = await youtubedl(videoUrl, {
   getUrl: true,
-  format: 'bestaudio/best',
+  format: 'bestaudio',
   noWarnings: true,
   noCheckCertificates: true,
   concurrentFragments: 5,
