@@ -82,14 +82,14 @@ app.get("/getaudio",async(req,res)=>{
         res.redirect(cachedlink)
     }else{
         const audioUrl = await youtubedl(videoUrl, {
-      getUrl:true,           
-      format: 'bestaudio/best',   
-      noWarnings: true,
-      noCheckCertificates: true,
-      youtubeSkipDashManifest: true, 
-    concurrentFragments: 5, 
-      ignoreConfig:true
-    });
+  getUrl: true,
+  format: 'bestaudio/best',
+  noWarnings: true,
+  noCheckCertificates: true,
+  concurrentFragments: 5,
+  ignoreConfig: true,
+  cookies: 'cookies.txt',
+});
     await redis.set(videoId,audioUrl,"EX",18000)
     res.redirect(audioUrl)
     }
